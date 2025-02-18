@@ -28,7 +28,7 @@ public class View {
             System.out.println("8. List Characters");
             System.out.println("9. Filter by Herkunftort");
             System.out.println("10. Filter Character By Produkt Ort");
-            System.out.println("11. Sort Characters By Products");
+            System.out.println("11. Sort Products By Character and Price");
             int choice = Integer.valueOf(scanner.nextLine());
             switch (choice) {
                 case 1:
