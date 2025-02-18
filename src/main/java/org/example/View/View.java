@@ -25,6 +25,7 @@ public class View {
             System.out.println("6. Update Character");
             System.out.println("7. Delete Character");
             System.out.println("8. List Characters");
+            System.out.println("9. Filter by Herkunftort");
             int choice = Integer.valueOf(scanner.nextLine());
             switch (choice) {
                 case 1:
@@ -51,6 +52,10 @@ public class View {
                 case 8:
                     listCharacter();
                     break;
+                case 9:
+                    filterCharacterByOrt();
+                case 10:
+
                 case 0:
                     return;
                 default:
@@ -130,6 +135,12 @@ public class View {
 
     private void listCharacter() {
         controller.printCharacter();
+    }
+
+    public void filterCharacterByOrt(){
+        System.out.println("Give Herkunftsort: ");
+        String ort = scanner.nextLine();
+        controller.filterCharacterByOrt(ort);
     }
 
 }

@@ -5,6 +5,7 @@ import org.example.Model.Produkt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Controller {
     private List<Produkt> produkte;
@@ -57,5 +58,11 @@ public class Controller {
 
     public void deleteCharacter(int index){
         this.charakters.remove(index - 1);
+    }
+
+    public List<Charakter> filterCharacterByOrt(String ort){
+        return this.charakters.stream()
+                .filter(c -> c.getOrt().equals(ort))
+                .collect(Collectors.toList());
     }
 }
