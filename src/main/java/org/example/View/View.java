@@ -4,6 +4,7 @@ import org.example.Controller.Controller;
 import org.example.Model.Charakter;
 import org.example.Model.Produkt;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
@@ -27,6 +28,7 @@ public class View {
             System.out.println("8. List Characters");
             System.out.println("9. Filter by Herkunftort");
             System.out.println("10. Filter Character By Produkt Ort");
+            System.out.println("11. Sort Characters By Products");
             int choice = Integer.valueOf(scanner.nextLine());
             switch (choice) {
                 case 1:
@@ -58,6 +60,9 @@ public class View {
                     break;
                 case 10:
                     filterCharacterByProduktOrt();
+                    break;
+                case 11:
+                    sortCharacterProducts();
                     break;
                 case 0:
                     return;
@@ -143,13 +148,28 @@ public class View {
     public void filterCharacterByOrt(){
         System.out.println("Give Herkunftsort: ");
         String ort = scanner.nextLine();
-        System.out.println(controller.filterCharacterByOrt(ort));
+        controller.filterCharacterByOrt(ort);
     }
 
     public void filterCharacterByProduktOrt(){
         System.out.println("Give Produkt Ort");
         String ort = scanner.nextLine();
-        System.out.println(controller.characterByProduktOrt(ort));
+        controller.characterByProduktOrt(ort);
+    }
+
+    private void sortCharacterProducts() {
+        System.out.println("Enter character name: ");
+        String name = scanner.nextLine();
+        System.out.println("Sortierreihenfolge: ");
+        String order = scanner.nextLine();
+        List<Produkt> products = controller.sortedProducts(name, order);
+        if (products != null) {
+            for (Produkt product : products) {
+                System.out.println(product.getName() + " - " + product.getPreis());
+            }
+        } else {
+            System.out.println("Customer not found!");
+        }
     }
 
 

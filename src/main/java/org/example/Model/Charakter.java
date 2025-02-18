@@ -60,4 +60,8 @@ public class Charakter {
     public void add(Produkt produkt){
         this.produkte.add(produkt);
     }
+
+    public void kaufeProdukt(Produkt produkt) {
+        this.produkte.add(produkt);
+    }
 }

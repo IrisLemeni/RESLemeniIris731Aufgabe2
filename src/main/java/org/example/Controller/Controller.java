@@ -4,6 +4,7 @@ import org.example.Model.Charakter;
 import org.example.Model.Produkt;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,11 @@ public class Controller {
     public Controller() {
         this.produkte = new ArrayList<>();
         this.charakters = new ArrayList<>();
+    }
+
+    public Controller(List<Produkt> produkte,List<Charakter> charakters){
+        this.produkte = produkte;
+        this.charakters = charakters;
     }
 
     public void addProdukt(Produkt produkt){
@@ -60,16 +66,37 @@ public class Controller {
         this.charakters.remove(index - 1);
     }
 
-    public List<Charakter> filterCharacterByOrt(String ort){
-        return this.charakters.stream()
+    public void filterCharacterByOrt(String ort){
+       this.charakters.stream()
                 .filter(c -> c.getOrt().equals(ort))
-                .collect(Collectors.toList());
+                .map(c -> c.getName())
+                .forEach(n -> System.out.println(n));
     }
 
-    public List<Charakter> characterByProduktOrt(String ort){
-        return this.charakters.stream()
+    public void characterByProduktOrt(String ort){
+        this.charakters.stream()
                 .filter(c -> c.getProdukte().stream()
                         .anyMatch(p -> p.getRegion().equals(ort)))
-                .collect(Collectors.toList());
+                .map(c -> c.getName())
+                .sorted()
+                .forEach(n -> System.out.println(n));
+    }
+
+    public List<Produkt> sortedProducts(String character, String order){
+        Charakter charakter = charakters.stream()
+                .filter(c -> c.getName().equals(character))
+                .findFirst()
+                .orElse(null);
+
+        if(charakter != null){
+            List<Produkt> produkte = charakter.getProdukte();
+            if (order.equals("Aufsteigend")){
+                produkte.sort(Comparator.comparing(Produkt::getPreis));
+            } else if (order.equals("Absteigend")) {
+                produkte.sort(Comparator.comparing(Produkt::getPreis).reversed());
+            }
+            return produkte;
+        }
+        return null;
     }
 }
