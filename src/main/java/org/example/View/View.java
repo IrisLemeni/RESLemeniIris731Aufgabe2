@@ -1,4 +1,8 @@
-package org.example;
+package org.example.View;
+
+import org.example.Controller.Controller;
+import org.example.Model.Charakter;
+import org.example.Model.Produkt;
 
 import java.util.Scanner;
 
@@ -17,6 +21,10 @@ public class View {
             System.out.println("2. Update Product");
             System.out.println("3. Delete Product");
             System.out.println("4. List Products");
+            System.out.println("5. Add Character");
+            System.out.println("6. Update Character");
+            System.out.println("7. Delete Character");
+            System.out.println("8. List Characters");
             int choice = Integer.valueOf(scanner.nextLine());
             switch (choice) {
                 case 1:
@@ -31,6 +39,22 @@ public class View {
                 case 4:
                     listProdukt();
                     break;
+                case 5:
+                    addCharacter();
+                    break;
+                case 6:
+                    updateCharacter();
+                    break;
+                case 7:
+                    deleteCharacter();
+                    break;
+                case 8:
+                    listCharacter();
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Wrong input");
             }
         }
     }
@@ -70,4 +94,42 @@ public class View {
     private void listProdukt(){
         controller.printProdukte();
     }
+
+    private void addCharacter() {
+        System.out.println("Enter character ID: ");
+        int id = Integer.valueOf(scanner.nextLine());
+        System.out.println("Enter character name: ");
+        String name = scanner.nextLine();
+        System.out.println("Enter character city: ");
+        String city = scanner.nextLine();
+        Charakter character = new Charakter(id, name, city);
+        controller.addCharacter(character);
+    }
+
+    private void updateCharacter() {
+        listCharacter();
+        System.out.println("Enter the index of the character to update: ");
+        int index = Integer.valueOf(scanner.nextLine());
+        System.out.println("Enter new character ID: ");
+        int id = Integer.valueOf(scanner.nextLine());
+        System.out.println("Enter new character name: ");
+        String name = scanner.nextLine();
+        System.out.println("Enter new character city: ");
+        String city = scanner.nextLine();
+        Charakter character = new Charakter(id, name, city);
+        controller.updateCharacter(index, character);
+    }
+
+    private void deleteCharacter() {
+        listCharacter();
+        System.out.println("Enter the index of the customer to delete: ");
+        int index = Integer.valueOf(scanner.nextLine());
+        controller.deleteCharacter(index);
+        System.out.println("Customer deleted!");
+    }
+
+    private void listCharacter() {
+        controller.printCharacter();
+    }
+
 }

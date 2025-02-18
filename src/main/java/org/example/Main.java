@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.Controller.Controller;
+import org.example.Model.Produkt;
+import org.example.View.View;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
