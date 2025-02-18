@@ -84,15 +84,15 @@ public class Controller {
 
     public List<Produkt> sortedProducts(String character, String order){
         Charakter charakter = charakters.stream()
-                .filter(c -> c.getName().equals(character))
+                .filter(c -> c.getName().equals(character.trim()))
                 .findFirst()
                 .orElse(null);
 
         if(charakter != null){
             List<Produkt> produkte = charakter.getProdukte();
-            if (order.equals("Aufsteigend")){
+            if (order.trim().equals("Aufsteigend")){
                 produkte.sort(Comparator.comparing(Produkt::getPreis));
-            } else if (order.equals("Absteigend")) {
+            } else if (order.trim().equals("Absteigend")) {
                 produkte.sort(Comparator.comparing(Produkt::getPreis).reversed());
             }
             return produkte;
