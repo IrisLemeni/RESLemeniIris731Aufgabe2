@@ -65,4 +65,11 @@ public class Controller {
                 .filter(c -> c.getOrt().equals(ort))
                 .collect(Collectors.toList());
     }
+
+    public List<Charakter> characterByProduktOrt(String ort){
+        return this.charakters.stream()
+                .filter(c -> c.getProdukte().stream()
+                        .anyMatch(p -> p.getRegion().equals(ort)))
+                .collect(Collectors.toList());
+    }
 }
